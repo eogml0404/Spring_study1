@@ -17,4 +17,15 @@ public class MemberController {
 		return "/member/memberJoin";
 	}
 
+	
+	//가상경로
+	@RequestMapping(value="/member/memberLogin.do")
+	public String memberLogin() {
+		
+		
+		
+		return "/member/memberLogin";
+	}
+	
+	
 }
