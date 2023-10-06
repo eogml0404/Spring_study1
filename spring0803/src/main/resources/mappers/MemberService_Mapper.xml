@@ -5,24 +5,10 @@
 <mapper namespace="com.my0803.myapp.persistance.MemberService_Mapper">
 
 <insert id="memberInsert" parameterType="mv">
-INSERT INTO member1230(midx,memberId,memberPwd,memberName,memberPhone,memberEmail,memberGender, memberAddr,memberBirth)
-VALUES(midx_seq.nextval,#{memberid},#{memberpwd},#{membername},#{memberphone},#{memberemail},#{membergender},#{memberaddr},#{memberbirth})
+insert into member0803(memberid,memberpwd,membername,memberbirth,membergender,memberphone,memberemail,memberaddr,memberhobby) 
+values(#{memberId},#{memberPwd},#{memberName},#{memberBirth},#{memberGender},#{memberPhone},#{memberEmail},#{memberAddr},#{memberHobby})
 
 </insert>
-
-<select id="memberList" resultType="mv">
-select midx, memberid, membername, delyn, writeday from member1230 order by midx desc
-</select>
-
-<select id="memberIdCheck" parameterType="String" resultType="int">
-	select count(*) as cnt from member1230 where memberid=#{memberId}
-</select>
-
-<select id="memberLogin" parameterType="String" resultType="mv">
-	select * from member1230 where delyn='N' and memberid=#{memberid} 
-</select>
-
-
 
 
 </mapper>

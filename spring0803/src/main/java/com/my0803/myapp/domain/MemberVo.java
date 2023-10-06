@@ -12,7 +12,60 @@ public class MemberVo {
 	private String delyn;		//삭제여부
 	private String writeday;	//등록일
 	private String memberIp;	//ip추출
+	private String memberBirth;
+	private String memberGender;
+	private String memberAddr;
+	private String memberHobby;
+	private String memberYear;
+	private String memberMonth;
+	private String memberDay;
 	
+	
+	
+	public String getMemberYear() {
+		return memberYear;
+	}
+	public void setMemberYear(String memberYear) {
+		this.memberYear = memberYear;
+	}
+	public String getMemberMonth() {
+		return memberMonth;
+	}
+	public void setMemberMonth(String memberMonth) {
+		this.memberMonth = memberMonth;
+	}
+	public String getMemberDay() {
+		return memberDay;
+	}
+	public void setMemberDay(String memberDay) {
+		this.memberDay = memberDay;
+	}
+	public String getMemberAddr() {
+		return memberAddr;
+	}
+	public void setMemberAddr(String memberAddr) {
+		this.memberAddr = memberAddr;
+	}
+	public String getMemberGender() {
+		return memberGender;
+	}
+	public void setMemberGender(String memberGender) {
+		this.memberGender = memberGender;
+	}
+	
+	
+	public String getMemberBirth() {
+		return memberBirth;
+	}
+	public void setMemberBirth(String memberBirth) {
+		this.memberBirth = memberBirth;
+	}
+	public String getMemberHobby() {
+		return memberHobby;
+	}
+	public void setMemberHobby(String memberHobby) {
+		this.memberHobby = memberHobby;
+	}
 	public int getMidx() { 		//회원번호 값을 꺼내는 메소드
 		return midx;
 	}
