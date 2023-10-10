@@ -12,8 +12,11 @@ values(#{memberId},#{memberPwd},#{memberName},#{memberBirth},#{memberGender},#{m
 
 <select id = "memberLogin" parameterType="HashMap" resultType="mv">
 select midx,memberid,membername from member0803 where memberid=#{memberId} and memberpwd=#{memberPwd}
+</select>
 
 
+<select id = "memberLogin2" parameterType="String" resultType="mv">
+select midx,memberid,membername,memberpwd from member0803 where memberid=#{memberId}
 </select>
 
 

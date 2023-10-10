@@ -52,7 +52,20 @@ public class MemberServiceImpl implements MemberService {
 		mv = msm.memberLogin(hm);
 		
 		
+		return mv;
+	}
+
+
+
+	//memberId만 받는 로그인메소드
+	@Override
+	public MemberVo memberLogin2(String memberId) {
 		
+		MemberVo mv = null;
+		mv = msm.memberLogin2(memberId);
+		
+		
+		//System.out.println("저장된 비밀번호" + mv.getMemberPwd());
 		
 		return mv;
 	}

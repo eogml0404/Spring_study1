@@ -11,4 +11,5 @@ public interface MemberService_Mapper {
 
 	public MemberVo memberLogin(HashMap hm);
 	
+	public MemberVo memberLogin2(String memberId);
 }

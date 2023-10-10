@@ -3,6 +3,7 @@ package com.my0803.myapp.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,9 @@ public class MemberController {
 
 	@Autowired //객체주입요청
 	MemberService ms;
+	
+	@Autowired //빈에 등록된 암호화 모듈 객체를 주입해 달라고 요청
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	
 	//가상경로
@@ -42,6 +46,11 @@ public class MemberController {
 		String birth = mv.getMemberYear()+mv.getMemberMonth()+mv.getMemberDay();
 		
 		mv.setMemberBirth(birth);
+		
+		//암호화 시킨 거
+		String memberPwd2 = bCryptPasswordEncoder.encode(mv.getMemberPwd());
+		//암호화된 비밀번호 세팅
+		mv.setMemberPwd(memberPwd2);
 		
 		int value = ms.memberInsert(mv);
 		
@@ -69,20 +78,34 @@ public class MemberController {
 	public String memberLoginAction(@RequestParam("memberId")String memberId,@RequestParam("memberPwd")String memberPwd,
 			HttpSession session) {
 		
-		MemberVo mv = ms.memberLogin(memberId, memberPwd);
 		
-		if(mv != null) {
-		session.setAttribute("midx",mv.getMidx());
+		//기존방식
+		//MemberVo mv = ms.memberLogin(memberId, memberPwd);
+		MemberVo mv = ms.memberLogin2(memberId);
+		//암호 비교방식 - 아이디에 해당하는 비밀번호를 가지고와서 날 것과 비교
+		
+		String path = "";	
+		if(mv != null && bCryptPasswordEncoder.matches(memberPwd, mv.getMemberPwd())) {
+			session.setAttribute("midx",mv.getMidx());
+			//session.setAttribute("memberName", mv.getMemberName());
+		
+		
 		//System.out.println("회원번호는?" + mv.getMidx());
 		//System.out.println("회원아이디는?" + mv.getMemberId());
 		//System.out.println("회원이름은?" + mv.getMemberName());
 		
-
+		
+			
+			path = "index.jsp";
+		}else {
+			
+			path = "member/memberLogin.do";
 			
 		}
 		
 		//중간값
-		return "redirect:/index.jsp"; 
+			return "redirect:/" + path;
+		
 	}
 	
 	@RequestMapping(value="/memberLogout.do")
@@ -90,6 +113,7 @@ public class MemberController {
 		session.removeAttribute("midx");
 		session.removeAttribute("memberName");
 		
+		//세션무효화하고 종료
 		session.invalidate();
 		
 		
