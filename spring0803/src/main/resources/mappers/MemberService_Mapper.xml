@@ -19,6 +19,16 @@ select midx,memberid,membername from member0803 where memberid=#{memberId} and m
 select midx,memberid,membername,memberpwd from member0803 where memberid=#{memberId}
 </select>
 
+<select id="memberIdCheck" parameterType="String" resultType="int">
+select count(*) as cnt from member0803 where memberId=#{memberid}
+
+</select>
+
+<select id="memberList" resultType="mv">
+select midx,memberid,membername,writeday from member0803 where delyn='N' order by midx desc
+
+</select>
+
 
 
 </mapper>

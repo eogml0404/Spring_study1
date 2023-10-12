@@ -1,5 +1,6 @@
 package com.my0803.myapp.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
@@ -68,6 +69,33 @@ public class MemberServiceImpl implements MemberService {
 		//System.out.println("저장된 비밀번호" + mv.getMemberPwd());
 		
 		return mv;
+	}
+
+
+
+
+	@Override
+	public int memberIdCheck(String memberId) {
+		
+		int value = 0;
+		value = msm.memberIdCheck(memberId);
+		
+		
+		
+		return value;
+	}
+
+
+
+
+	@Override
+	public ArrayList<MemberVo> memberList() {
+		//마이바티스와 연동
+		System.out.println("msm ?"+msm);
+		ArrayList<MemberVo> alist = msm.memberList();
+		
+		
+		return alist;
 	}
 	
 

@@ -6,7 +6,8 @@
     
 <%
 //포워드는 공유속성떄문에 넘겨받을수 있다
-ArrayList<MemberVo> list= (ArrayList<MemberVo>)request.getAttribute("list"); %>
+ArrayList<MemberVo> list= null;
+list = (ArrayList<MemberVo>)request.getAttribute("alist"); %>
 
 
 

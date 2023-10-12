@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.my0803.myapp.persistance.BoardService_Mapper">
+
+<insert id="boardInsert" parameterType="bv">
+<selectKey resultType="int" keyProperty="bidx"  order="AFTER">
+select max(bidx) as bidx from board0803
+</selectKey>
+
+INSERT INTO board0803(originbidx, depth, level_,SUBJECT,CONTENTS,WRITER,midx,pwd,filename)
+ VALUES(null,0,0,#{subject},#{contents},#{writer},#{midx},#{pwd},#{filename})
+</insert>
+
+<update id="boardOriginBidxUpdate" parameterType="int">
+update board0803 set originbidx=#{bidx} where bidx=#{bidx}
+</update>
+
+<sql id="search">
+<if test="searchType != null and searchType.equals('writer')">
+	and writer like concat('%',#{keyword},'%')
+</if>
+<if test="searchType != null and searchType.equals('subject')">
+	and subject like concat('%',#{keyword},'%')
+</if>
+</sql>
+<select id="boardSelectAll"  parameterType="scri" resultType="bv">
+select * from board0803 where delyn='N' 
+<include refid="search" />
+order by originbidx desc, depth asc limit #{page},#{perPageNum}
+</select>
+<select id="boardTotalCount" parameterType="scri" resultType="Integer">
+select count(*) as cnt from board0803 where delyn='N'
+<include refid="search" />
+</select>
+
+
+</mapper>

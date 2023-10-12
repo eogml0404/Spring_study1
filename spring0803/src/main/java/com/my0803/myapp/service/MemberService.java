@@ -1,5 +1,7 @@
 package com.my0803.myapp.service;
 
+import java.util.ArrayList;
+
 import com.my0803.myapp.domain.MemberVo;
 
 //DAO 역할을 하는 interface생성
@@ -13,5 +15,8 @@ public interface MemberService {
 	public MemberVo memberLogin(String memberId,String memberPwd);
 	
 	public MemberVo memberLogin2(String memberId);
+
+	public int memberIdCheck(String memberId);
 	
+	public ArrayList<MemberVo> memberList();
 }

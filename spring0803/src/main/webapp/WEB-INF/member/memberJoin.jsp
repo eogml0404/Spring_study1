@@ -19,15 +19,15 @@ $(document).ready(function(){
 		
 		$.ajax({
 		type : "post",
-		url : "./memberIdCheck.jsp",
+		url : "<%=request.getContextPath()%>/member/memberIdCheck.do",
 		data : {"memberId" : memberId},
 		dataType : "json",
 		success : function(data){
 			
 			//alert("성공");
-			alert(data.cnt);
+			//alert(data.cnt);
 			
-			if(data.cnt == 0){
+			if(data.value == 0){
 				
 				alert("사용할 수 있는 아이디입니다.");
 			}

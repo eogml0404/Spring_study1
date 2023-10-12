@@ -1,12 +1,16 @@
 package com.my0803.myapp.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.my0803.myapp.domain.MemberVo;
 import com.my0803.myapp.service.MemberService;
@@ -83,19 +87,17 @@ public class MemberController {
 		//MemberVo mv = ms.memberLogin(memberId, memberPwd);
 		MemberVo mv = ms.memberLogin2(memberId);
 		//암호 비교방식 - 아이디에 해당하는 비밀번호를 가지고와서 날 것과 비교
-		
+		System.out.println(mv.getMemberPwd());
 		String path = "";	
 		if(mv != null && bCryptPasswordEncoder.matches(memberPwd, mv.getMemberPwd())) {
 			session.setAttribute("midx",mv.getMidx());
-			//session.setAttribute("memberName", mv.getMemberName());
+			session.setAttribute("memberName",mv.getMemberName());
 		
 		
 		//System.out.println("회원번호는?" + mv.getMidx());
 		//System.out.println("회원아이디는?" + mv.getMemberId());
 		//System.out.println("회원이름은?" + mv.getMemberName());
-		
-		
-			
+
 			path = "index.jsp";
 		}else {
 			
@@ -120,5 +122,36 @@ public class MemberController {
 		//중간값
 		return "redirect:/index.jsp";
 	}
+	
+	
+	//responsebody를 쓰면 경로가 아니라 객체를 리턴 할 수 있음 원래 경로만 리턴가능
+	@ResponseBody
+	@RequestMapping(value="/memberIdCheck.do")
+	public String memberIdCheck(String memberId) {
+		
+		String str = null;
+		
+		//member/memberIdCheck.do?memberId=test88 를 경로를 치면 아이디가 존재하므로 value는 1 출력
+		int value = ms.memberIdCheck(memberId);
+		
+		str = "{\"value\":\""+value+"\"}";
+		
+		
+		
+		//Json파일 형태로 리턴해줘야함
+		return str;
+	}
+	
+	@RequestMapping(value="/memberList.do")
+	public String memberList(Model model) {
+		
+		ArrayList<MemberVo> alist =	ms.memberList();
+
+		
+		model.addAttribute("alist", alist);
+	
+		return "member/memberList";
+	}		
+	
 	
 }
