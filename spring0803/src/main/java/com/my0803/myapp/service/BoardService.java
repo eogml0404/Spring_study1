@@ -14,5 +14,7 @@ public interface BoardService {
 	public ArrayList<BoardVo> boardSelectAll(SearchCriteria  scri);
 	
 	public int boardTotalCount(SearchCriteria  scri);
+
+	public BoardVo boardContents(int bidx);
 	
 }

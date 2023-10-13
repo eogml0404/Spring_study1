@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.my0803.myapp.domain.BoardVo;
 import com.my0803.myapp.domain.PageMaker;
@@ -72,5 +73,24 @@ public class BoardController {
 		// 게시판 글 목록 화면으로 이동
 		return "/board/boardList";
 	}
+	
+	@RequestMapping(value="/boardContents.do")
+	public String boardContents(@RequestParam("bidx")int bidx,Model model) {
+		
+		
+		BoardVo bv = bs.boardContents(bidx);
+
+		
+		model.addAttribute("bv", bv);
+	
+		
+		//중간값
+		return "/board/boardContents";
+	}	
+	
+	
+	
+	
+	
 	
 }

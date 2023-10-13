@@ -10,6 +10,8 @@ import com.my0803.myapp.domain.BoardVo;
 import com.my0803.myapp.domain.SearchCriteria;
 import com.my0803.myapp.persistance.BoardService_Mapper;
 
+//마이바티스 구현하는 곳
+//쿼리 구현하는곳 
 @Service
 public class BoardServiceImpl implements BoardService{
 
@@ -52,5 +54,19 @@ public class BoardServiceImpl implements BoardService{
 		int value = bsm.boardTotalCount(scri);
 		
 		return value;
+		
 	}
+	
+	@Override
+	public BoardVo boardContents(int bidx) {
+		
+		bsm.boardViewCnt(bidx);
+		
+		BoardVo bv = bsm.boardContents(bidx);
+		
+		return bv;
+		
+	}
+	
+
 }

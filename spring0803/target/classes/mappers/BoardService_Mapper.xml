@@ -35,5 +35,12 @@ select count(*) as cnt from board0803 where delyn='N'
 <include refid="search" />
 </select>
 
+<select id="boardContents"  parameterType="int" resultType="bv">
+select * from board0803 where bidx=#{bidx}
+</select>
+
+<update id="boardViewCnt"  parameterType="int">
+update board0803 set viewcnt = viewcnt + 1 where bidx=#{bidx}
+</update>
 
 </mapper>
