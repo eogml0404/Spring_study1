@@ -65,13 +65,14 @@ $.boardCommentList = function(){
 	
 	$.ajax({
 		type : "get",	//get방식으로 주소를 넘긴다
-		url : "<%=request.getContextPath()%>/comment/commentList.do", //commentList를 가져오게끔 가상경로를 만들어줌
+		//commentList를 가져오게끔 가상경로를 만들어줌 , RestFull 방식 : 경로에 추가하는 방식(댓글쓸때 사용)
+		url : "<%=request.getContextPath()%>/comment/<%=bv.getBidx()%>/commentList.do",
 		dataType : "json",
 		cache : false,
 		success : function(data){
 			//alert("통신성공");
 			
-			commentList(data);
+			commentList(data.alist);
 			//$.each(data, function(index){
 			//	alert(index);
 			//	alert(data[index].cidx);
