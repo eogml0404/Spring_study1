@@ -161,10 +161,10 @@ function commentList(data){
 		<tr>
 		<th></th>
 		<td style="text-align:right;">
-		<button type="button" onclick="location.href='<%=request.getContextPath()%>/board/boardModify.do?bidx=<%=bv.getBidx() %>'">수정</button>
-		<button type="button" onclick="location.href='<%=request.getContextPath()%>/board/boardDelete.do?bidx=<%=bv.getBidx() %>'">삭제</button>
-		<button type="button" onclick="location.href='<%=request.getContextPath()%>/board/boardReply.do?bidx=<%=bv.getBidx() %>&originbidx=<%=bv.getOriginbidx()%>&depth=<%=bv.getDepth()%>&level_=<%=bv.getLevel_()%>'">답변</button>
-		<button type="button" onclick="location.href='<%=request.getContextPath()%>/board/boardList.do'">목록</button>			
+		<button type="button" onclick="location.href='${pageContext.request.contextPath}/board/boardModify.do?bidx=${bv.bidx}'">수정</button>
+		<button type="button" onclick="location.href='${pageContext.request.contextPath}/board/boardDelete.do?bidx=${bv.bidx}'">삭제</button>
+		<button type="button" onclick="location.href='${pageContext.request.contextPath}/board/boardReply.do?bidx=${bv.bidx}&originbidx=${bv.originbidx}&depth=${bv.depth}&level_=${bv.level_}'">답변</button>
+		<button type="button" onclick="location.href='${pageContext.request.contextPath}/board/boardList.do'">목록</button>			
 		</td>
 		</tr>
 </table>

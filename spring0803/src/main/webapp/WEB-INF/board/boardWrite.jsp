@@ -46,7 +46,7 @@ function check(){
 	fm.method = "post";  //이동하는 방식  get 노출시킴 post 감추어서 전달
 	
 	//이미지까지 같이함
-	//fm.enctype= "multipart/form-data";
+	fm.enctype= "multipart/form-data";
 	fm.submit(); //전송시킴
 	return;
 }

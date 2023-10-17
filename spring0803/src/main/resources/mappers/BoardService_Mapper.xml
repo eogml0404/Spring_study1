@@ -8,9 +8,8 @@
 <selectKey resultType="int" keyProperty="bidx"  order="AFTER">
 select max(bidx) as bidx from board0803
 </selectKey>
-
-INSERT INTO board0803(originbidx, depth, level_,SUBJECT,CONTENTS,WRITER,midx,pwd,filename)
- VALUES(null,0,0,#{subject},#{contents},#{writer},#{midx},#{pwd},#{filename})
+INSERT INTO board0803(originbidx, depth, level_,SUBJECT,CONTENTS,WRITER,midx,pwd,filename,ip)
+ VALUES(null,0,0,#{subject},#{contents},#{writer},#{midx},#{pwd},#{filename2},#{ip})
 </insert>
 
 <update id="boardOriginBidxUpdate" parameterType="int">
@@ -42,5 +41,27 @@ select * from board0803 where bidx=#{bidx}
 <update id="boardViewCnt"  parameterType="int">
 update board0803 set viewcnt = viewcnt + 1 where bidx=#{bidx}
 </update>
+
+<update id="boardModify" parameterType="bv">
+UPDATE board0803 SET SUBJECT = #{subject}, CONTENTS=#{contents}, WRITER=#{writer}, MODIFYDAY=now()
+WHERE bidx=#{bidx} AND PWD=#{pwd}
+</update>
+
+<delete id="boardDelete" parameterType="HashMap">
+delete from board0803 where bidx=#{bidx} and pwd=#{pwd}
+</delete>
+
+
+<update id="boardUpdateDepth" parameterType="bv" >
+update board0803 set depth = depth+1 where depth > #{depth} and originbidx=#{originbidx}
+</update>
+
+<insert id="boardReply" parameterType="bv">
+<selectKey resultType="int" keyProperty="bidx"  order="AFTER">
+select max(bidx) as bidx from board0803
+</selectKey>
+INSERT INTO board0803(originbidx, depth, level_, SUBJECT, contents, writer, midx, pwd, ip)
+VALUES(#{originbidx}, #{depth}+1, #{level_}+1, #{subject}, #{contents}, #{writer}, #{midx}, #{pwd}, #{ip})
+</insert>
 
 </mapper>

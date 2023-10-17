@@ -1,5 +1,7 @@
 package com.my0803.myapp.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class BoardVo {
 
 	private int bidx;
@@ -16,13 +18,20 @@ public class BoardVo {
 	private int midx;
 	private String pwd;
 	private String modifyday;
-	private String filename;
+	private String filename2;
+	//private MultipartFile filename;
 	
-	public String getFilename() {
-		return filename;
+//	public MultipartFile getFilename() {
+//		return filename;
+//	}
+//	public void setFilename(MultipartFile filename) {
+//		this.filename = filename;
+//	}
+	public String getFilename2() {
+		return filename2;
 	}
-	public void setFilename(String filename) {
-		this.filename = filename;
+	public void setFilename2(String filename2) {
+		this.filename2 = filename2;
 	}
 	public int getBidx() {
 		return bidx;

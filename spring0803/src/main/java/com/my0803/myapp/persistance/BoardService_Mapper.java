@@ -1,6 +1,7 @@
 package com.my0803.myapp.persistance;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.my0803.myapp.domain.BoardVo;
 import com.my0803.myapp.domain.SearchCriteria;
@@ -19,4 +20,13 @@ public interface BoardService_Mapper {
 	public BoardVo boardContents(int bidx);
 	
 	public int boardViewCnt(int bidx);
+	
+	public int boardModify(BoardVo bv);
+	
+	public int boardDelete(HashMap hm);
+	
+	public int boardReply(BoardVo bv);
+	
+	public int boardUpdateDepth(BoardVo bv);
+	
 }

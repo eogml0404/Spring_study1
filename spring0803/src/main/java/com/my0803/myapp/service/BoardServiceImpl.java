@@ -1,6 +1,7 @@
 package com.my0803.myapp.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +68,42 @@ public class BoardServiceImpl implements BoardService{
 		return bv;
 		
 	}
+
+
+	@Override
+	public int boardModify(BoardVo bv) {
+		int value = bsm.boardModify(bv);
+		
+		//System.out.println("value" + value);
+		
+		return value;
+	}
+
+
+	@Override
+	public int boardDelete(int bidx,String pwd) {
+		
+		String bidxs = bidx+"";
+		HashMap<String,String> hm = new HashMap<>();
+		hm.put("bidx", bidxs);
+		hm.put("pwd", pwd);
+		int value = bsm.boardDelete(hm);
+		
+		return value;
+	}
+
+
+	@Override
+	public int boardReply(BoardVo bv) {
+		
+		bsm.boardUpdateDepth(bv);
+		int value = bsm.boardReply(bv);
+		
+		return value;
+	}
+
+
+
 	
 
 }
