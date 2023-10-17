@@ -39,7 +39,18 @@ public class CommentServiceImpl implements CommentService{
 		ArrayList<CommentVo> alist = csm.commentSelectAll(bidx);
 		
 		
+		
 		return alist;
+	}
+
+
+	@Override
+	public int commentDelete(int cidx) {
+		
+		int value = csm.commentDelete(cidx);
+		
+		
+		return value;
 	}
 
 }

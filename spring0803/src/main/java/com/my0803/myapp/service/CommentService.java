@@ -10,4 +10,6 @@ public interface CommentService {
 	
 	public ArrayList<CommentVo> commentSelectAll(int bidx);
 	
+	public int commentDelete(int cidx);
+	
 }

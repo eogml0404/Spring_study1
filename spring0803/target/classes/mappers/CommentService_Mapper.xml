@@ -14,4 +14,11 @@ values(#{cwriter},#{ccontents},#{bidx},#{midx})
 <select id="commentSelectAll" parameterType="int" resultType="cv">
 select * from comment0803 where bidx = #{bidx} and delyn='N' order by cidx desc
 </select>
+
+<delete id="commentDelete" parameterType="int">
+delete from comment0803 where cidx = #{cidx}
+
+</delete>
+
+
 </mapper>

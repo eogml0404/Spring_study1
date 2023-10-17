@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.my0803.myapp.domain.CommentVo;
@@ -25,10 +26,6 @@ public class CommentController {
 	@RequestMapping(value="/commentWrite.do",method=RequestMethod.POST)
 	public JSONObject commentWrite(CommentVo cv) {
 		
-
-		
-		
-		
 		String str = null;
 		int value = 0;
 		//str = "{\"value\":\""+value+"\"}";
@@ -36,7 +33,6 @@ public class CommentController {
 		
 		JSONObject js = new JSONObject();
 		js.put("value", value);
-		
 		
 		
 		
@@ -60,5 +56,23 @@ public class CommentController {
 		return js;
 		
 	}
+	
+	@RequestMapping(value="/commentDelete.do")
+	public JSONObject commentDelete(int cidx) {
+		
+		
+		int value = cs.commentDelete(cidx);
+
+		JSONObject js = new JSONObject();
+		//제이슨으로 받는다.
+		js.put("value",value);
+		
+		
+		//중간값
+		return js;
+		
+	}	
+	
+	
 	
 }
