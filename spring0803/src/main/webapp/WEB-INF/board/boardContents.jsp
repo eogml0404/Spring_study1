@@ -91,7 +91,7 @@ function commentDel(cidx) {	//commentDel는 매개변수로 cidx를 받겠다
 	$.ajax({
 		type : "get",	//cidx값 하나만 넘기니까 get방식으로 주소를 넘긴다 -> get방식은 하단의 URL 끝에 ?붙여서 cidx 붙여주기
 				//commentDelete를 가져오게끔 가상경로를 만들어줌
-		url : "<%=request.getContextPath()%>/comment/commentDelete.do?cidx="+cidx, 
+		url : "<%=request.getContextPath()%>/comment/"+cidx+"/commentDelete.do?cidx="+cidx, 
 		dataType : "json",
 		cache : false,
 		success : function(data){

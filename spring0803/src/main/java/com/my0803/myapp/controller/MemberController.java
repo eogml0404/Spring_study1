@@ -2,6 +2,7 @@ package com.my0803.myapp.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.my0803.myapp.domain.MemberVo;
 import com.my0803.myapp.service.MemberService;
@@ -80,7 +82,8 @@ public class MemberController {
 	//가상경로
 	@RequestMapping(value="/memberLoginAction.do")
 	public String memberLoginAction(@RequestParam("memberId")String memberId,@RequestParam("memberPwd")String memberPwd,
-			HttpSession session) {
+			HttpServletRequest request,
+			RedirectAttributes rttr) {
 		
 		
 		//기존방식
@@ -90,15 +93,20 @@ public class MemberController {
 		System.out.println(mv.getMemberPwd());
 		String path = "";	
 		if(mv != null && bCryptPasswordEncoder.matches(memberPwd, mv.getMemberPwd())) {
-			session.setAttribute("midx",mv.getMidx());
-			session.setAttribute("memberName",mv.getMemberName());
-		
-		
-		//System.out.println("회원번호는?" + mv.getMidx());
-		//System.out.println("회원아이디는?" + mv.getMemberId());
-		//System.out.println("회원이름은?" + mv.getMemberName());
-
-			path = "index.jsp";
+			rttr.addAttribute("midx",mv.getMidx());
+			rttr.addAttribute("memberName",mv.getMemberName());
+			
+	
+			//세이브경로가 없으면 그 경로로 가게끔
+			if(request.getSession().getAttribute("saveUrl")!=null) {
+				
+				// 경로가 /spring/spring 으로 나오기때문에 빼줘야함
+				path = (String)request.getSession().getAttribute("saveUrl").toString().substring(request.getContextPath().length()+1);
+				
+			}else {
+				path = "index.jsp";
+			}
+			
 		}else {
 			
 			path = "member/memberLogin.do";

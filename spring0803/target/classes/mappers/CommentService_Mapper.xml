@@ -15,10 +15,9 @@ values(#{cwriter},#{ccontents},#{bidx},#{midx})
 select * from comment0803 where bidx = #{bidx} and delyn='N' order by cidx desc
 </select>
 
-<delete id="commentDelete" parameterType="int">
-delete from comment0803 where cidx = #{cidx}
-
-</delete>
+<update id="commentDelete" parameterType="int">
+update comment0803 set delyn='Y' where cidx=#{cidx}
+</update>
 
 
 </mapper>

@@ -56,9 +56,9 @@ public class CommentController {
 		return js;
 		
 	}
-	
-	@RequestMapping(value="/commentDelete.do")
-	public JSONObject commentDelete(int cidx) {
+	//pathVariable URL 경로에서 변수 값을 추출하는 데 사용되는 어노테이션입니다
+	@RequestMapping(value="/{cidx}/commentDelete.do")
+	public JSONObject commentDelete(@PathVariable("cidx")int cidx) {
 		
 		
 		int value = cs.commentDelete(cidx);

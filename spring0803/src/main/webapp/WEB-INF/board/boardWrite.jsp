@@ -4,10 +4,10 @@
 <%
 	//로그인안하면
 	//request.getContextPath() = 프로젝트이름
-	if(session.getAttribute("midx")==null){
+	//if(session.getAttribute("midx")==null){
 		
-		out.println("<script>alert('로그인하셔야합니다');location.href='"+request.getContextPath()+"/member/memberLogin.do'</script>");
-	}
+	//	out.println("<script>alert('로그인하셔야합니다');location.href='"+request.getContextPath()+"/member/memberLogin.do'</script>");
+	//}
 
 %>    
     
